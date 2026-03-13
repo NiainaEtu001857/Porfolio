@@ -1,0 +1,130 @@
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 4px }
+    ::-webkit-scrollbar-track { background: #f0f6ff }
+    ::-webkit-scrollbar-thumb { background: #2563eb; border-radius: 2px }
+
+    /* ── Background mesh gradient ── */
+    body {
+      background-color: #eef3ff;
+      background-image:
+        radial-gradient(ellipse 80% 60% at 10% 0%,   rgba(37,99,235,.13) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 10%,  rgba(14,165,233,.10) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 70% at 50% 100%, rgba(37,99,235,.08) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 80% 60%,  rgba(99,102,241,.07) 0%, transparent 50%);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── Subtle animated grain overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .4;
+    }
+
+    /* ── Hero subtle grid ── */
+    .hero-grid {
+      background-image:
+        linear-gradient(rgba(37,99,235,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(37,99,235,.04) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+
+    /* ── Scroll-appear ── */
+    .sa { opacity:0; transform:translateY(18px); transition:opacity .6s, transform .6s }
+    .sa.vis { opacity:1; transform:none }
+
+    /* ── Timeline ── */
+    .tl-item { opacity:0; transform:translateX(-10px); transition:opacity .5s, transform .5s }
+    .tl-item.vis { opacity:1; transform:none }
+    .tl-line::before { content:''; position:absolute; left:0; top:6px; bottom:6px; width:1px; background:rgba(37,99,235,.18) }
+    .tl-dot::before { content:''; position:absolute; left:-1.9rem; top:5px; width:11px; height:11px; border-radius:50%; background:#2563eb; border:2px solid #eef3ff; box-shadow:0 0 0 3px rgba(37,99,235,.18) }
+
+    /* ── Animations ── */
+    @keyframes fu { from { opacity:0; transform:translateY(20px) } to { opacity:1; transform:none } }
+    @keyframes fi { from { opacity:0 } to { opacity:1 } }
+    @keyframes pulse { 0%,100% { transform:scale(1) } 50% { transform:scale(1.65) } }
+    .afu { animation:fu .7s ease both }
+    .afi { animation:fi .9s ease both }
+    .apu { animation:pulse 2s infinite }
+
+    /* ── Nav active ── */
+    .nav-link.active { color:#2563eb; background:rgba(37,99,235,.07) }
+
+    /* ── Skill badge ── */
+    .sk-badge {
+      display:inline-flex; align-items:center; gap:.4rem;
+      padding:.35rem .8rem; border-radius:100px;
+      font-family:'Space Mono', monospace; font-size:.73rem; font-weight:500;
+      letter-spacing:.03em; border:1px solid;
+      transition:transform .2s, box-shadow .2s;
+    }
+    .sk-badge:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(37,99,235,.15) }
+
+    /* ── Category card ── */
+    .cat-card {
+      background:white; border-radius:18px;
+      border:1px solid rgba(37,99,235,.1);
+      padding:1.4rem 1.6rem;
+      box-shadow:0 2px 16px rgba(37,99,235,.06);
+      transition:transform .3s, box-shadow .3s;
+    }
+    .cat-card:hover { transform:translateY(-4px); box-shadow:0 14px 40px rgba(37,99,235,.12) }
+    .cat-num {
+      width:2rem; height:2rem; border-radius:8px; font-family:'Space Mono', monospace;
+      font-size:.78rem; font-weight:700; display:flex; align-items:center;
+      justify-content:center; margin-bottom:.6rem;
+    }
+
+    /* ── Project card ── */
+    .proj-card {
+      background:white; border-radius:20px;
+      border:1px solid rgba(37,99,235,.1); overflow:hidden;
+      box-shadow:0 4px 20px rgba(37,99,235,.07);
+      transition:transform .3s, box-shadow .3s;
+    }
+    .proj-card:hover { transform:translateY(-6px); box-shadow:0 20px 50px rgba(37,99,235,.14) }
+    /* ── Carousel ── */
+    .carousel { position:relative; width:100%; height:210px; overflow:hidden }
+    .carousel-track { display:flex; height:100%; transition:transform .45s cubic-bezier(.4,0,.2,1) }
+    .carousel-slide {
+      min-width:100%; height:100%;
+      display:flex; align-items:center; justify-content:center;
+      position:relative; flex-shrink:0;
+    }
+    .carousel-slide::after { content:''; position:absolute; inset:0; background:linear-gradient(0deg,rgba(10,20,50,.12),transparent) }
+    .c-code { font-size:2.8rem; opacity:.38; font-family:'Space Mono',monospace; color:#1a3a6b; font-weight:700; letter-spacing:-2px; z-index:1 }
+    .c-num { position:absolute; top:.9rem; left:1rem; font-family:'Space Mono',monospace; font-size:1.35rem; font-weight:500; color:rgba(37,99,235,.45); letter-spacing:.06em; z-index:2 }
+    /* Arrow buttons */
+    .c-arrow {
+      position:absolute; top:50%; transform:translateY(-50%);
+      width:30px; height:30px; border-radius:50%;
+      background:rgba(255,255,255,.85); border:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      font-size:.75rem; color:#1e4080; z-index:3;
+      opacity:0; transition:opacity .2s, transform .2s;
+      box-shadow:0 2px 8px rgba(0,0,0,.15);
+    }
+    .c-arrow:hover { background:white; transform:translateY(-50%) scale(1.1) }
+    .c-arrow.left { left:.6rem }
+    .c-arrow.right { right:.6rem }
+    .proj-card:hover .c-arrow { opacity:1 }
+    /* Dots */
+    .c-dots { position:absolute; bottom:.65rem; left:50%; transform:translateX(-50%); display:flex; gap:.4rem; z-index:3 }
+    .c-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.45); border:none; cursor:pointer; padding:0; transition:background .25s, transform .25s }
+    .c-dot.active { background:white; transform:scale(1.35) }
+    /* Ext link */
+    .proj-ext {
+      position:absolute; top:.75rem; right:.75rem; width:32px; height:32px; z-index:3;
+      border-radius:50%; background:#2563eb; display:flex; align-items:center;
+      justify-content:center; color:white; font-size:.85rem; text-decoration:none;
+      opacity:0; transition:opacity .25s, transform .25s; transform:scale(.8);
+    }
+    .proj-card:hover .proj-ext { opacity:1; transform:scale(1) }
+
+    /* ── Section bg alternation ── */
+    .bg-section { background:rgba(240,246,255,.75); backdrop-filter:blur(2px) }
