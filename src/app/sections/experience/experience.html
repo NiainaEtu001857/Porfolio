@@ -1,0 +1,45 @@
+<section id="experience" class="py-20 border-b border-line">
+  <div class="max-w-site mx-auto px-6">
+    <div class="sa" appScrollAppear>
+      <app-section-heading [heading]="experience" />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16">
+        <div>
+          <h3 class="text-[1.08rem] mb-5">{{ experience.educationTitle[lang()] }}</h3>
+
+          @for (entry of experience.education; track entry.id) {
+            <div
+              class="tl-item border-t border-line py-5"
+              [appScrollAppear]="$index * stagger"
+              [scrollAppearThreshold]="0.1"
+            >
+              <div class="flex items-baseline justify-between gap-4">
+                <h4 class="text-[1.1rem] font-medium text-ink">{{ entry.title[lang()] }}</h4>
+                @if (entry.period) {
+                  <span class="kicker flex-shrink-0">{{ entry.period[lang()] }}</span>
+                }
+              </div>
+              <p class="text-[1.04rem] text-muted mt-0.5">{{ entry.org[lang()] }}</p>
+              <p class="text-[1.06rem] mt-2 max-w-[42ch]">{{ entry.detail[lang()] }}</p>
+            </div>
+          }
+        </div>
+
+        <div>
+          <h3 class="text-[1.08rem] mb-5">{{ experience.associationsTitle[lang()] }}</h3>
+
+          @for (association of experience.associations; track association.id) {
+            <div
+              class="tl-item border-t border-line py-5"
+              [appScrollAppear]="$index * stagger"
+              [scrollAppearThreshold]="0.1"
+            >
+              <h4 class="text-[1.1rem] font-medium text-ink">{{ association.name[lang()] }}</h4>
+              <p class="text-[1.06rem] mt-2">{{ association.detail[lang()] }}</p>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

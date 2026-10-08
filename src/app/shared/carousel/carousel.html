@@ -1,0 +1,37 @@
+<div class="carousel">
+  <div class="carousel-track" [style.transform]="offset()">
+    @for (slide of slides(); track slide.src) {
+      <div class="carousel-slide" [style.background]="slide.background">
+        <img [src]="slide.src" [alt]="slide.alt[lang()]" loading="lazy" />
+      </div>
+    }
+  </div>
+
+  @if (number()) {
+    <div class="c-num">{{ number() }}</div>
+  }
+
+  @if (link()) {
+    <a [href]="link()" class="proj-ext" [attr.aria-label]="labels.viewProject[lang()]">↗</a>
+  }
+
+  <button type="button" class="c-arrow left" [attr.aria-label]="labels.previousImage[lang()]" (click)="move(-1)">
+    ‹
+  </button>
+  <button type="button" class="c-arrow right" [attr.aria-label]="labels.nextImage[lang()]" (click)="move(1)">
+    ›
+  </button>
+
+  <div class="c-dots">
+    @for (slide of slides(); track slide.src) {
+      <button
+        type="button"
+        class="c-dot"
+        [class.active]="$index === index()"
+        [attr.aria-label]="labels.goToImage[lang()] + ' ' + ($index + 1)"
+        [attr.aria-current]="$index === index()"
+        (click)="goTo($index)"
+      ></button>
+    }
+  </div>
+</div>

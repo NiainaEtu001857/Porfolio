@@ -1,0 +1,62 @@
+<nav
+  class="nav-bar fixed top-0 inset-x-0 z-50 transition-all duration-300"
+  [class.nav-bar--scrolled]="scrolled()"
+>
+  <div class="max-w-site mx-auto px-6 h-16 flex items-center justify-between gap-6">
+    <app-brand-mark />
+
+    <ul class="hidden md:flex items-center gap-1 list-none m-0 p-0">
+      @for (item of items; track item.id) {
+        <li>
+          <a
+            [href]="'#' + item.id"
+            class="nav-pill"
+            [class.nav-pill--active]="activeId() === item.id"
+            [attr.aria-current]="activeId() === item.id ? 'true' : null"
+          >
+            {{ item.label[lang()] }}
+          </a>
+        </li>
+      }
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <button type="button" class="lang-switch" (click)="language.toggle()" [attr.aria-label]="lang() === 'fr' ? 'Switch to English' : 'Passer en français'">
+        <span [class.lang-switch__on]="lang() === 'fr'">FR</span>
+        <span [class.lang-switch__on]="lang() === 'en'">EN</span>
+      </button>
+
+      <button
+        type="button"
+        class="md:hidden burger"
+        [class.burger--open]="menuOpen()"
+        [attr.aria-expanded]="menuOpen()"
+        [attr.aria-label]="labels.menu[lang()]"
+        (click)="toggleMenu()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </div>
+
+</nav>
+
+<!-- Menu mobile -->
+<div class="mobile-menu md:hidden fixed top-16 inset-x-0 z-40" [class.mobile-menu--open]="menuOpen()">
+  <div class="mx-4 mt-3 rounded-2xl bg-surface/95 backdrop-blur-md shadow-[0_20px_50px_-20px_rgba(15,31,61,.35)] border border-line p-2">
+    @for (item of items; track item.id) {
+      <a
+        [href]="'#' + item.id"
+        class="mobile-link"
+        [class.mobile-link--active]="activeId() === item.id"
+        [style.transition-delay]="menuOpen() ? $index * 60 + 'ms' : '0ms'"
+        (click)="closeMenu()"
+      >
+        <span>{{ item.label[lang()] }}</span>
+        <span class="mobile-link__dot" aria-hidden="true"></span>
+      </a>
+    }
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<section id="skills" class="py-20 border-b border-line">
+  <div class="max-w-site mx-auto px-6">
+    <div class="sa" appScrollAppear>
+      <app-section-heading [heading]="skills" />
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-9">
+        @for (category of skills.categories; track category.id) {
+          <div>
+            <h3 class="text-[1.1rem] mb-0.5">{{ category.name[lang()] }}</h3>
+            <p class="kicker mb-3">{{ category.subtitle[lang()] }}</p>
+            <div class="flex flex-wrap gap-1.5">
+              @for (item of category.items; track item) {
+                <span class="sk-badge" [style]="badge(item, category.theme.color)">{{ item }}</span>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

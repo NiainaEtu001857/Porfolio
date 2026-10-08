@@ -1,0 +1,42 @@
+<section id="about" class="py-20 border-b border-line">
+  <div class="max-w-site mx-auto px-6">
+    <div class="sa" appScrollAppear>
+      <app-section-heading [heading]="about" />
+
+      <div class="grid grid-cols-1 md:grid-cols-[1.3fr_1fr] gap-10 md:gap-16 items-start">
+        <div class="max-w-[38rem]">
+          @for (paragraph of about.paragraphs; track $index) {
+            <p class="leading-[1.75]" [class]="$last ? 'mb-8' : 'mb-4'">{{ paragraph[lang()] }}</p>
+          }
+
+          <dl class="grid grid-cols-3 gap-6 pt-6 border-t border-line">
+            @for (stat of about.stats; track stat.label.fr) {
+              <div>
+                <dd class="text-[1.5rem] font-semibold text-ink m-0">{{ stat.value }}</dd>
+                <dt class="kicker mt-0.5">{{ stat.label[lang()] }}</dt>
+              </div>
+            }
+          </dl>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          @for (card of about.tagCards; track card.title.fr) {
+            <div>
+              <h3 class="text-[1.08rem] mb-2.5">{{ card.title[lang()] }}</h3>
+              <div class="flex flex-wrap gap-1.5">
+                @for (item of card.items; track item) {
+                  <span class="sk-badge" [style]="badge(item)">{{ item }}</span>
+                }
+              </div>
+            </div>
+          }
+
+          <div>
+            <h3 class="text-[1.08rem] mb-2">{{ about.interests.title[lang()] }}</h3>
+            <p class="text-[1.06rem]">{{ about.interests.text[lang()] }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

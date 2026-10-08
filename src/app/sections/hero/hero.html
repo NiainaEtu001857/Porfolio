@@ -1,0 +1,65 @@
+<section id="home" class="relative overflow-hidden pt-28 pb-20 border-b border-line">
+  <span class="hero-blob hero-blob--blue" aria-hidden="true"></span>
+  <span class="hero-blob hero-blob--amber" aria-hidden="true"></span>
+  <div class="max-w-site mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 md:gap-14 items-start">
+      <div class="max-w-[34rem]">
+        <h1 class="hero-name text-[2.1rem] md:text-[2.5rem] mb-3 afu">{{ brand.fullName }}</h1>
+        <p class="text-[1.05rem] text-ink mb-6 afu" style="animation-delay: 0.05s">
+          {{ hero.role[lang()] }} — {{ hero.place[lang()] }}
+        </p>
+
+        <p class="text-[1.12rem] leading-[1.75] mb-8 afu" style="animation-delay: 0.1s">
+          {{ hero.pitch[lang()] }}
+        </p>
+
+        <div class="flex gap-3 flex-wrap items-center afu" style="animation-delay: 0.15s">
+          <a href="#contact" class="btn btn-primary">{{ hero.secondaryCta[lang()] }}</a>
+
+          <div class="resume-group">
+            <a [href]="resume.file" target="_blank" rel="noopener" class="resume-view">
+              {{ resume.view[lang()] }}
+            </a>
+            <a
+              [href]="resume.file"
+              [attr.download]="resume.downloadName"
+              class="resume-download"
+              [attr.aria-label]="resume.download[lang()]"
+              [attr.title]="resume.download[lang()]"
+            >
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 3v12m0 0 4-4m-4 4-4-4M4 19h16" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="photo-frame hidden md:block" style="animation-delay: 0.2s">
+        <img
+          [src]="hero.photo"
+          [alt]="brand.fullName"
+          class="photo-reveal w-[15rem] aspect-[3/4] object-cover rounded-2xl border border-line"
+        />
+      </div>
+    </div>
+
+    <dl class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-14 pt-8 border-t border-line afu" style="animation-delay: 0.2s">
+      @for (fact of hero.facts; track fact.label.fr) {
+        <div>
+          <dt class="kicker mb-1">{{ fact.label[lang()] }}</dt>
+          <dd class="text-[1.08rem] text-ink m-0">{{ fact.value[lang()] }}</dd>
+        </div>
+      }
+    </dl>
+  </div>
+</section>
